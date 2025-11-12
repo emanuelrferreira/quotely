@@ -3,10 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Calculadora</title>
 
     <!-- Aqui teremos as informacoes sobre os calculos e parcelas de pagamento sobre o valor do curso e 
      a coleta de informações básicas do Agente e Aluno -->
+
+<div class="cotacao">
+
+    <div>
+        Data: <input type="date" name="dataCotacao" id=""> <br>
+        Agente: <input type="text"> <br>
+        Nome aluno: <input type="text">
+    </div>
+    <hr>
+    <div>
+        <h2>Cotação</h2>
+        <p>Cotação EURO/Dia</p>
+        <input type="double">
+
+        <p>Valor do pacote</p>
+        <input type="double">
+    </div>
+    <hr>
+    <div>
+        <h2>Cartão de Crédito</h2>
+        <p>Parcelas: </p>
+        <select name="parcelas" id="parcelas">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+        </select>
+
+        Juros <br>
+        % da parcela <br>
+        Euros 50,00 <br>
+        Valor por parcela <br>
+        R$ 50,00 <br>
+        EUR 30,00
+
+        <br>
+
+        Total <br>
+
+        EUR <br>
+        BRL
+    </div>
+    <hr>
+    <div>
+        <h2>PIX</h2>
+
+        Valor do pacote + IOF: 1.699,99 <br>
+        Taxa fixa PIX: 1% <br><br>
+
+        <table border="2">
+            <tr>
+                <th colspan="2">Total</th>                
+            </tr>
+            <tr>
+                <td>EUR</td>
+                <td>1.200,00</td>
+            </tr>
+            <tr>
+                <td>BRL</td>
+                <td>7.200,00</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
 </head>
 <body>
     
