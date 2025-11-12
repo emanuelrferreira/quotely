@@ -1,16 +1,32 @@
-:root {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
     --background: 0 0% 100%;
     --foreground: 222 47% 11%;
     --muted-foreground: 215 16% 47%;
     --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 215 20% 65%;
     --primary: 24 95% 53%;
     --primary-foreground: 0 0% 100%;
     --secondary: 222 89% 56%;
     --secondary-foreground: 0 0% 100%;
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-    --accent: 222 14% 95%;
-    --accent-foreground: 222 47% 11%;
 }
+
+@layer components {
+    .btn {
+        @apply inline-flex items-center justify-center font-medium rounded-lg transition-colors;
+    }
+    .btn-lg {
+        @apply px-6 py-2.5 text-base;
+    }
+    .btn-primary {
+        @apply bg-primary text-primary-foreground hover:bg-primary/90 transition-colors;
+    }
+    .btn-outline { 
+        @apply border border-border bg-transparent hover:border-muted-foreground;
+    }
+}
+
+
+html{ scroll-behavior:smooth; }

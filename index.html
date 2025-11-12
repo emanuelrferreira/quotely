@@ -4,34 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="./dist/output.css"/>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="./dist/output.css" />
     <title>Quotely</title>
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous"> -->
-    <link rel="stylesheet" href="styles.css">
 </head>
-<<<<<<< HEAD
-
-<body>
-    
-    <header>
-        <nav class="navbar navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#index.html">Quotely</a>
+<body class="bg-background text-foreground">
+<header class="border-b border-border bg-background">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+    <a href="./index.html" class="flex items-center gap-3">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-primary text-primary-foreground flex items-center justify-center font-bold text-lg">Q</div>
+            <div>
+            <h1 class="text-2xl font-bold text-foreground">Quotely</h1>
+            <p class="text-xs text-muted-foreground">by Brickcode</p>
             </div>
-        </nav>
-    </header>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-
-=======
-<body class="">
-    <!-- header and navigation -->
-     <div class="min-h-screen bg-background text-foreground flex items-center justify-center">
-  <div class="p-10 rounded-2xl border border-border bg-primary text-primary-foreground">
-    🎉 Tailwind configurado! (border-border + bg-primary)
-  </div>
-</div>
->>>>>>> 330f494 (tailwind build)
+        </div>
+    </a>
+    <nav class="flex items-center gap-4">
+        <a href="./calculadora.html" class="btn btn-primary btn-lg">Abrir Calculadora</a>
+    </nav>
+    </div>
+</header>
+<section class="max-w-6xl mx-auto px-4 py-20">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div id="hero-left-box">
+            <h2 class="text-5xl font-bold text-foreground mb-6 leading-tight tracking-tight">Orçamentos em Segundos</h2>
+            <p class="text-x1 text-muted-foreground mb-8">Transforme cálculos complexos de câmbio, juros e parcelamentos em simulações precisas e profissionais. Gere PDFs prontos para compartilhar.</p>
+            <div class="flex gap-4">
+                <a href="./calculadora.html" class="btn btn-primary btn-lg">Começar Agora</a>
+                <a href="#features" class="btn btn-outline btn-lg">Saiba Mais</a>
+            </div>
+        </div>
+        <div id="hero-right-box">
+            
+        </div>
+    </div>
+</section>
 </body>
 </html>
