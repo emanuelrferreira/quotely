@@ -1,125 +1,242 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Calculadora</title>
-
-    <!-- Aqui teremos as informacoes sobre os calculos e parcelas de pagamento sobre o valor do curso e 
-     a coleta de informações básicas do Agente e Aluno -->
-
-<div class="cotacao">
-
-    <div>
-        Data: <input type="date" name="dataCotacao" id=""> <br>
-        Agente: <input type="text"> <br>
-        Nome aluno: <input type="text">
-    </div>
-    <hr>
-    <div>
-        <h2>Cotação</h2>
-        <p>Cotação EURO/Dia</p>
-        <input type="double">
-
-        <p>Valor do pacote</p>
-        <input type="double">
-    </div>
-    <hr>
-    <div>
-        <h2>Cartão de Crédito</h2>
-        Parcelas:
-        <div id="juros">
-            <!-- PARCELAS E SUAS TAXAS -->
-            1X - 3,70%
-            2X - 4,57%
-            3X - 5,20%
-            4X - 5,82%
-            5X - 6,45%
-            6X - 7,08%
-            7X - 7,80%
-            8X - 8,42%
-            9X - 9,05%
-            10X - 9,67%
-            11X - 10,30%
-            12X - 10,92%
-        </div>
-
-        <select name="parcelas" id="parcelas">
-            <option value="1">1x</option>
-            <option value="2">2x</option>
-            <option value="3">3x</option>
-            <option value="4">4x</option>
-            <option value="5">5x</option>
-            <option value="6">6x</option>
-            <option value="7">7x</option>
-            <option value="8">8x</option>
-            <option value="9">9x</option>
-            <option value="10">10x</option>
-            <option value="11">11x</option>
-            <option value="12">12x</option>
-        </select>
-
-
-        <br>
-        Juros: 3,70% | Euros 50,00 <br><br>
-
-        <table border="2">
-            <tr>
-                <th colspan="2">Valor por parcela</th>                
-            </tr>
-            <tr>
-                <td>EUR</td>
-                <td>200,00</td>
-            </tr>
-            <tr>
-                <td>BRL</td>
-                <td>1,200,00</td>
-            </tr>
-        </table>
-        <br>
-
-        <table border="2">
-            <tr>
-                <th colspan="2">Total</th>                
-            </tr>
-            <tr>
-                <td>EUR</td>
-                <td>200,00</td>
-            </tr>
-            <tr>
-                <td>BRL</td>
-                <td>1,200,00</td>
-            </tr>
-        </table>
-
-    </div>
-    <hr>
-    <div>
-        <h2>PIX</h2>
-
-        Valor do pacote + IOF: 1.699,99 <br>
-        Taxa fixa PIX: 1% <br><br>
-
-        <table border="2">
-            <tr>
-                <th colspan="2">Total</th>                
-            </tr>
-            <tr>
-                <td>EUR</td>
-                <td>1.200,00</td>
-            </tr>
-            <tr>
-                <td>BRL</td>
-                <td>7.200,00</td>
-            </tr>
-        </table>
-    </div>
-
-</div>
-
+    <title>Calculadora de Cotação de Curso de Inglês</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: white; }
+        .section { margin-bottom: 20px; border: 1px solid #ccc; padding: 10px; }
+        label { display: block; margin-bottom: 5px; }
+        input, select { margin-bottom: 10px; padding: 5px; width: 200px; }
+        .result { font-weight: bold; margin-top: 10px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: center; }
+        th { background-color: #f2f2f2; }
+        button { padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; margin-top: 20px; }
+        button:hover { background-color: #45a049; }
+    </style>
 </head>
 <body>
-    
+    <h1>Calculadora de Cotação de Curso de Inglês</h1>
+
+    <div class="section">
+        <h2>Informações Gerais</h2>
+        <label for="data">Data do Dia:</label>
+        <input type="text" id="data" readonly>
+
+        <label for="agente">Nome do Agente de Vendas:</label>
+        <input type="text" id="agente" placeholder="Digite o nome do agente">
+
+        <label for="aluno">Nome do Aluno:</label>
+        <input type="text" id="aluno" placeholder="Digite o nome do aluno">
+    </div>
+
+    <div class="section">
+        <h2>Valores de Entrada</h2>
+        <label for="euro">Valor da Cotação do Euro do Dia (R$):</label>
+        <input type="number" id="euro" step="0.01" placeholder="Ex: 5.50">
+
+        <label for="curso">Valor do Pacote do Curso (em Euros):</label>
+        <input type="number" id="curso" step="0.01" placeholder="Ex: 1000.00">
+    </div>
+
+    <div class="section">
+        <h2>Opções de Pagamento - Cartão de Crédito</h2>
+        <label for="parcelas">Selecione o Número de Parcelas:</label>
+        <select id="parcelas">
+            <option value="1">1X - 3,70%</option>
+            <option value="2">2X - 4,57%</option>
+            <option value="3">3X - 5,20%</option>
+            <option value="4">4X - 5,82%</option>
+            <option value="5">5X - 6,45%</option>
+            <option value="6">6X - 7,08%</option>
+            <option value="7">7X - 7,80%</option>
+            <option value="8">8X - 8,42%</option>
+            <option value="9">9X - 9,05%</option>
+            <option value="10">10X - 9,67%</option>
+            <option value="11">11X - 10,30%</option>
+            <option value="12">12X - 10,92%</option>
+        </select>
+
+        <table id="tabelaParcelas">
+            <thead>
+                <tr>
+                    <th>Parcelas</th>
+                    <th>Juros (%)</th>
+                    <th>Valor Parcela (€)</th>
+                    <th>Valor Parcela (R$)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Linhas serão populadas dinamicamente -->
+            </tbody>
+        </table>
+
+        <div class="result">
+            <p>Número de Parcelas: <span id="numParcelas">1</span></p>
+            <p>Juros Aplicado: <span id="jurosAplicado">3.70%</span></p>
+            <p>Valor da Parcela em Euros: €<span id="valorParcelaEuro">0.00</span></p>
+            <p>Valor da Parcela em Reais: R$<span id="valorParcelaReal">0.00</span></p>
+            <p>Total do Curso em Euros: €<span id="totalEuro">0.00</span></p>
+            <p>Total do Curso em Reais (R$): R$<span id="totalReal">0.00</span></p>
+        </div>
+    </div>
+
+    <button id="gerarPDF">Gerar PDF</button>
+
+    <script>
+        // Função para obter a data atual
+        function setCurrentDate() {
+            const today = new Date();
+            const dateStr = today.toLocaleDateString('pt-BR');
+            document.getElementById('data').value = dateStr;
+        }
+
+        // Juros por parcela (em porcentagem)
+        const juros = {
+            1: 3.70,
+            2: 4.57,
+            3: 5.20,
+            4: 5.82,
+            5: 6.45,
+            6: 7.08,
+            7: 7.80,
+            8: 8.42,
+            9: 9.05,
+            10: 9.67,
+            11: 10.30,
+            12: 10.92
+        };
+
+        // Função para popular a tabela com valores calculados
+        function popularTabela(totalEuro, totalReal) {
+            const tbody = document.querySelector('#tabelaParcelas tbody');
+            tbody.innerHTML = ''; // Limpar linhas existentes
+
+            for (let p = 1; p <= 12; p++) {
+                const valorParcelaEuro = totalEuro / p;
+                const valorParcelaReal = totalReal / p;
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${p}X</td>
+                    <td>${juros[p]}%</td>
+                    <td>€${valorParcelaEuro.toFixed(2)}</td>
+                    <td>R$${valorParcelaReal.toFixed(2)}</td>
+                `;
+                tbody.appendChild(row);
+            }
+        }
+
+        // Função para calcular os valores
+        function calcular() {
+            const euro = parseFloat(document.getElementById('euro').value) || 0;
+            const curso = parseFloat(document.getElementById('curso').value) || 0;
+            const parcelas = parseInt(document.getElementById('parcelas').value);
+
+            // Variáveis ocultas
+            const valorSpread = euro * 1.013; // Câmbio * 1,3%
+            const cursoIOF = curso * 1.035; // Valor do curso + 3,5%
+
+            // Valor do Euro: cursoIOF * (1 + juros/100)
+            const totalEuro = cursoIOF * (1 + juros[parcelas] / 100);
+
+            // Total em Real: valorSpread * totalEuro
+            const totalReal = valorSpread * totalEuro;
+
+            // Valor da parcela
+            const valorParcelaEuro = totalEuro / parcelas;
+            const valorParcelaReal = totalReal / parcelas;
+
+            // Atualizar displays
+            document.getElementById('numParcelas').textContent = parcelas;
+            document.getElementById('jurosAplicado').textContent = `${juros[parcelas]}%`;
+            document.getElementById('valorParcelaEuro').textContent = valorParcelaEuro.toFixed(2);
+            document.getElementById('valorParcelaReal').textContent = valorParcelaReal.toFixed(2);
+            document.getElementById('totalEuro').textContent = totalEuro.toFixed(2);
+            document.getElementById('totalReal').textContent = totalReal.toFixed(2);
+
+            // Popular a tabela com os valores das parcelas
+            popularTabela(totalEuro, totalReal);
+        }
+
+        // Função para gerar PDF
+        function gerarPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            // Coletar dados
+            const data = document.getElementById('data').value;
+            const agente = document.getElementById('agente').value;
+            const aluno = document.getElementById('aluno').value;
+            const euro = document.getElementById('euro').value;
+            const curso = document.getElementById('curso').value;
+            const parcelas = document.getElementById('parcelas').value;
+            const jurosSelecionado = juros[parcelas];
+            const valorParcelaEuro = document.getElementById('valorParcelaEuro').textContent;
+            const valorParcelaReal = document.getElementById('valorParcelaReal').textContent;
+            const totalEuro = document.getElementById('totalEuro').textContent;
+            const totalReal = document.getElementById('totalReal').textContent;
+
+            // Adicionar título
+            doc.setFontSize(16);
+            doc.text('Cotação de Curso de Inglês', 20, 20);
+
+            // Adicionar informações gerais
+            doc.setFontSize(12);
+            let y = 40;
+            doc.text(`Data do Dia: ${data}`, 20, y);
+            y += 10;
+            doc.text(`Nome do Agente de Vendas: ${agente}`, 20, y);
+            y += 10;
+            doc.text(`Nome do Aluno: ${aluno}`, 20, y);
+            y += 10;
+            doc.text(`Valor da Cotação do Euro do Dia (R$): ${euro}`, 20, y);
+            y += 10;
+            doc.text(`Valor do Pacote do Curso (em Euros): ${curso}`, 20, y);
+            y += 10;
+            doc.text(`Número de Parcelas Selecionado: ${parcelas}X`, 20, y);
+            y += 10;
+            doc.text(`Juros Aplicado: ${jurosSelecionado}%`, 20, y);
+            y += 10;
+            doc.text(`Valor da Parcela em Euros: €${valorParcelaEuro}`, 20, y);
+            y += 10;
+            doc.text(`Valor da Parcela em Reais: R$${valorParcelaReal}`, 20, y);
+            y += 10;
+            doc.text(`Total do Curso em Euros: €${totalEuro}`, 20, y);
+            y += 10;
+            doc.text(`Total do Curso em Reais (R$): R$${totalReal}`, 20, y);
+            y += 20;
+
+            // Adicionar tabela de parcelas
+            doc.text('Tabela de Parcelas:', 20, y);
+            y += 10;
+            doc.autoTable({
+                startY: y,
+                head: [['Parcelas', 'Juros (%)', 'Valor Parcela (€)', 'Valor Parcela (R$)']],
+                body: Array.from(document.querySelectorAll('#tabelaParcelas tbody tr')).map(row => {
+                    return Array.from(row.cells).map(cell => cell.textContent);
+                })
+            });
+
+            // Salvar o PDF
+            doc.save('cotacao_curso_ingles.pdf');
+        }
+
+        // Inicializar data
+        setCurrentDate();
+
+        // Popular tabela inicialmente com valores 0
+        popularTabela(0, 0);
+
+        // Adicionar event listeners para recalcular
+        document.getElementById('euro').addEventListener('input', calcular);
+        document.getElementById('curso').addEventListener('input', calcular);
+        document.getElementById('parcelas').addEventListener('change', calcular);
+
+        // Event listener para o botão de gerar PDF
+        document.getElementById('gerarPDF').addEventListener('click', gerarPDF);
+    </script>
 </body>
 </html>
