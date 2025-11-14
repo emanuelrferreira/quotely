@@ -84,6 +84,16 @@
         </div>
     </div>
 
+    <div class="section">
+        <h2>Opções de Pagamento PIX</h2>
+        <div class="result">
+            <p>Valor do cursoIOF (em Euros): €<span id="cursoIOF">0.00</span></p>
+            <p>Juros PIX (1€): €1.00</p>
+            <p>Total do Curso em Euros (PIX): €<span id="totalPIXEuro">0.00</span></p>
+            <p>Total do Curso em Reais (PIX): R$<span id="totalPIXReal">0.00</span></p>
+        </div>
+    </div>
+
     <button id="gerarPDF">Gerar PDF</button>
 
     <script>
@@ -149,6 +159,10 @@
             const valorParcelaEuro = totalEuro / parcelas;
             const valorParcelaReal = totalReal / parcelas;
 
+            // Para PIX: cursoIOF + 1 euro de juros
+            const totalPIXEuro = cursoIOF + 1;
+            const totalPIXReal = valorSpread * totalPIXEuro;
+
             // Atualizar displays
             document.getElementById('numParcelas').textContent = parcelas;
             document.getElementById('jurosAplicado').textContent = `${juros[parcelas]}%`;
@@ -156,6 +170,11 @@
             document.getElementById('valorParcelaReal').textContent = valorParcelaReal.toFixed(2);
             document.getElementById('totalEuro').textContent = totalEuro.toFixed(2);
             document.getElementById('totalReal').textContent = totalReal.toFixed(2);
+
+            // Para PIX
+            document.getElementById('cursoIOF').textContent = cursoIOF.toFixed(2);
+            document.getElementById('totalPIXEuro').textContent = totalPIXEuro.toFixed(2);
+            document.getElementById('totalPIXReal').textContent = totalPIXReal.toFixed(2);
 
             // Popular a tabela com os valores das parcelas
             popularTabela(totalEuro, totalReal);
@@ -178,6 +197,9 @@
             const valorParcelaReal = document.getElementById('valorParcelaReal').textContent;
             const totalEuro = document.getElementById('totalEuro').textContent;
             const totalReal = document.getElementById('totalReal').textContent;
+            const cursoIOF = document.getElementById('cursoIOF').textContent;
+            const totalPIXEuro = document.getElementById('totalPIXEuro').textContent;
+            const totalPIXReal = document.getElementById('totalPIXReal').textContent;
 
             // Adicionar título
             doc.setFontSize(16);
@@ -207,6 +229,14 @@
             doc.text(`Total do Curso em Euros: €${totalEuro}`, 20, y);
             y += 10;
             doc.text(`Total do Curso em Reais (R$): R$${totalReal}`, 20, y);
+            y += 10;
+            doc.text(`Valor do cursoIOF (em Euros): €${cursoIOF}`, 20, y);
+            y += 10;
+            doc.text(`Juros PIX (1€): €1.00`, 20, y);
+            y += 10;
+            doc.text(`Total do Curso em Euros (PIX): €${totalPIXEuro}`, 20, y);
+            y += 10;
+            doc.text(`Total do Curso em Reais (PIX): R$${totalPIXReal}`, 20, y);
             y += 20;
 
             // Adicionar tabela de parcelas
